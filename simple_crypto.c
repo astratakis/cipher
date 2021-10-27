@@ -45,3 +45,7 @@ void print_permutation(permutation p) {
     }
     printf("]\n");
 }
+
+char * one_time_pad(char *__input, int input_size, char *__key, int key_size) {
+    
+}
