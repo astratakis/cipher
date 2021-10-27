@@ -3,6 +3,7 @@
 
 int main(int argc, char **argv) {
 
-    
+    permutation p = generate_permutation();
+    print_permutation(p);
     return 0;
 }
