@@ -82,7 +82,6 @@ void execute_test(test *t) {
             t->verdict = TLE;
         }
     }
-    
 }
 
 void print_test(test *t, int index) {
