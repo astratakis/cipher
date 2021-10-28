@@ -8,3 +8,4 @@ int wrong_answer_example(void);
 int time_limit_example(void);
 
 int check_permutation(void);
+int check_read_stdin(void);

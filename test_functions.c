@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include "test_functions.h"
 #include "simple_crypto.h"
 
@@ -41,4 +45,22 @@ int check_permutation(void) {
     }
 
     return (sum == ((95 * 94) >> 1) ? SUCCESS : FAILURE);
+}
+
+int check_read_stdin(void) {
+    
+    char buffer[100];
+    int index = 0;
+    char *key;
+    read(STDIN_FILENO, &buffer, 100);
+
+    int length = strlen(buffer);
+    
+    key = malloc(length-1);
+
+    for (int i=0; i<length-1; i++) {
+        key[i] = buffer[i];
+    }
+
+    return SUCCESS;
 }
