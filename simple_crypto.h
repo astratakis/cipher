@@ -2,6 +2,7 @@
 
 typedef struct permutation {
     int nums[ASCII_READABLE_CHARS];
+    int size;
 } permutation;
 
 permutation generate_permutation();

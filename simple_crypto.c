@@ -22,6 +22,7 @@ int get_num(int array[], int size) {
 
 permutation generate_permutation() {
     permutation p;
+    p.size = ASCII_READABLE_CHARS;
 
     int initial[ASCII_READABLE_CHARS];
     for (int i=0; i<ASCII_READABLE_CHARS; i++) {

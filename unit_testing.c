@@ -4,18 +4,11 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include "unit_testing.h"
+#include "test_functions.h"
 
-#define SUCCESS 151
-#define FAILURE 150
-
-int example_test(void);
-int segmentation_fault_example(void);
-int wrong_answer_example(void);
-
-test unit_tests[] = 
-{{"example", "", 10, example_test},
- {"runtime error example", "", 10, segmentation_fault_example},
- {"wrong answer example", "", 10, wrong_answer_example}};
+test unit_tests[] = {
+    {"permutation test", "Check if there are no repeating numbers in the generated permutation", 1, check_permutation}
+};
 
 int main(int argc, char **argv) {
     
@@ -48,6 +41,11 @@ const char *verdict_to_string(test_verdict v) {
     return "Null";
 }
 
+void handle_alarm() {
+    alarm(0);
+    exit(TIME_LIMIT);
+}
+
 void execute_test(test *t) {
     t->verdict = RE;
 
@@ -55,43 +53,38 @@ void execute_test(test *t) {
     pid_t pid = fork();
 
     if (pid == 0) {
-        exit(t->function());
-    }
-    else if (pid > 0) {
-        int status;
-        if (waitpid(pid, &status, 0) == -1) {
-            perror("waitpid failed");
-            return;
-        }
+        signal(SIGALRM, handle_alarm);
 
-        if (WIFEXITED(status)) {
-            const int es = WEXITSTATUS(status);
-            if (es == SUCCESS) {
-                t->verdict = OK;
-            }
-            else if (es == FAILURE) {
-                t->verdict = WA;
-            }
+        alarm(t->timeout);
+
+        int ret = t->function();
+
+        alarm(0);
+        exit(ret);
+    }
+
+    int status;
+
+    if (waitpid(pid, &status, 0) == -1) {
+        perror("waitpid failed");
+        return;
+    }
+
+    if (WIFEXITED(status)) {
+        const int es = WEXITSTATUS(status);
+        if (es == SUCCESS) {
+            t->verdict = OK;
+        }
+        else if (es == FAILURE) {
+            t->verdict = WA;
+        }
+        else if (es == TIME_LIMIT) {
+            t->verdict = TLE;
         }
     }
+    
 }
 
 void print_test(test *t, int index) {
     printf("Test  [ %3d ] %30s  -  Verdict: [ %s%s%s ]\n", index, t->name, (t->verdict == 0 ? KGRN : (t->verdict == 1 ? KMAG : KRED)), verdict_to_string(t->verdict), RST);
-}
-
-int segmentation_fault_example(void) {
-    char *str = "as";
- 
-    /* Problem:  trying to modify read only memory */
-    *(str+1) = 'n';
-    return SUCCESS;
-}
-
-int example_test(void) {
-    return SUCCESS;
-}
-
-int wrong_answer_example(void) {
-    return FAILURE;
 }
