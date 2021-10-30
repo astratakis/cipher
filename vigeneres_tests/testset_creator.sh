@@ -1,10 +1,10 @@
 #!/bin/bash
 
-touch testset_2.txt
+touch testset_3.txt
 
-echo 1000 > testset_2.txt
+echo 10000 > testset_3.txt
 
-for i in {1..1000}
+for i in {1..10000}
 do
-    /bin/bash random_capital.sh >> testset_2.txt
+    /bin/bash random_capital.sh >> testset_3.txt
 done
