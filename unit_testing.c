@@ -13,7 +13,8 @@ test unit_tests[] = {
     {"wrong answer example", "Returns failure", 10, wrong_answer_example},
     {"runtime error example", "Generates a segmentation fault", 10, segmentation_fault_example},
     {"time limit exmaple", "An aterminal loop", 1, time_limit_example}*/
-    {"read input from stdin test", "Check if data from stdin is read correctly", 5, check_read_stdin},
+    {"read input from stdin test", "Check if data from stdin is read correctly", 2, check_read_stdin},
+    {"read input from file", "Check if data from input file is read correctly", 1, check_read_from_file},
     NULL
 };
 

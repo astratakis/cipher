@@ -9,3 +9,5 @@ int time_limit_example(void);
 
 int check_permutation(void);
 int check_read_stdin(void);
+int check_read_from_file(void);
+int key_addition_test(void);

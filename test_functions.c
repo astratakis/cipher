@@ -64,3 +64,39 @@ int check_read_stdin(void) {
 
     return SUCCESS;
 }
+
+int check_read_from_file(void) {
+
+    char buffer[100];
+    
+    FILE *fp = fopen("input/small_input.txt", "r");
+
+    if (fp == NULL) {
+        return FAILURE;
+    }
+
+    fgets(buffer, 100, fp);
+
+    int length = strlen(buffer);
+
+    if (strcmp(buffer, "Hello") != 0) {
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int key_addition_test(void) {
+    permutation p = generate_permutation();
+
+    char *initial_message = "Hello";
+    char *key = "Pizza";
+
+    if (srtlen(initial_message) != strlen(key)) {
+        return FAILURE;
+    }
+
+    for (int i=0; i<strlen(initial_message); i++) {
+        
+    }
+}
