@@ -12,7 +12,8 @@
 #define TIME_LIMIT 149
 
 test unit_tests[] = {
-    
+    {"Vigenere's Implementation ", "", 2, vigeneres_cipher_test_set_1},
+    {"Vigenere's Cipher (large) ", "", 2, vigeneres_cipher_test_set_2},
     NULL
 };
 
