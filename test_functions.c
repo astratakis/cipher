@@ -5,6 +5,10 @@
 #include "test_functions.h"
 #include "simple_crypto.h"
 
+#define SUCCESS 151
+#define FAILURE 150
+#define TIME_LIMIT 149
+
 int segmentation_fault_example(void) {
     char *str = "You make my software turn into hardware ;)";
  
@@ -26,4 +30,8 @@ int time_limit_example(void) {
 
     }
     return SUCCESS;
+}
+
+int vigeneres_cipher_test_set_1(void) {
+    
 }

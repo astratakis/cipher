@@ -7,6 +7,10 @@
 #include "unit_testing.h"
 #include "test_functions.h"
 
+#define SUCCESS 151
+#define FAILURE 150
+#define TIME_LIMIT 149
+
 test unit_tests[] = {
     
     NULL
