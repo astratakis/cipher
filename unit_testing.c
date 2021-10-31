@@ -5,19 +5,28 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include "unit_testing.h"
-#include "test_functions.h"
+
+#ifndef _COLORS_
+#define _COLORS_
+
+#define RST   "\x1B[0m"
+#define KRED  "\x1B[31m"
+#define KGRN  "\x1B[32m"
+#define KYEL  "\x1B[33m"
+#define KBLU  "\x1B[34m"
+#define KMAG  "\x1B[35m"
+#define KCYN  "\x1B[36m"
+#define KWHT  "\x1B[37m"
+
+#endif
 
 #define SUCCESS 151
 #define FAILURE 150
 #define TIME_LIMIT 149
 
-test unit_tests[] = {
-    {"Vigenere's Implementation", "", 2, vigeneres_cipher_test_set_1},
-    {"Vigenere's Cipher (large)", "", 2, vigeneres_cipher_test_set_2},
-    {"Ceasars table", "", 1, check_ceasars_table},
-    {"Time limit example", "", 1, time_limit_example},
-    NULL
-};
+const char *verdict_to_string(test_verdict v);
+void execute_test(test *t);
+void print_test(test *t, int index);
 
 int main(int argc, const char **argv) {
 
