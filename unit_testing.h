@@ -1,10 +1,10 @@
 #include "test_functions.h"
 
 typedef enum test_verdict {
-    OK,
-    TLE,
-    RE,
-    WA
+    OK,     // Successful test
+    TLE,    // Time limit exceeded
+    RE,     // Runtime Error
+    WA      // Wrong answer
 } test_verdict;
 
 typedef struct test {
