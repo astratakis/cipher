@@ -12,13 +12,14 @@
 #define TIME_LIMIT 149
 
 test unit_tests[] = {
-    {"Vigenere's Implementation ", "", 2, vigeneres_cipher_test_set_1},
-    {"Vigenere's Cipher (large) ", "", 2, vigeneres_cipher_test_set_2},
+    {"Vigenere's Implementation", "", 2, vigeneres_cipher_test_set_1},
+    {"Vigenere's Cipher (large)", "", 2, vigeneres_cipher_test_set_2},
+    {"Ceasars table", "", 1, check_ceasars_table},
+    {"Time limit example", "", 1, time_limit_example},
     NULL
 };
 
 int main(int argc, const char **argv) {
-
 
     int total_tests = sizeof(unit_tests) / sizeof(unit_tests[0]);
 

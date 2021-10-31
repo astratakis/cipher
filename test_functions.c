@@ -136,3 +136,9 @@ int vigeneres_cipher_test_set_2(void) {
 
     return SUCCESS;
 }
+
+int check_ceasars_table(void) {
+    ceasars_shift_vector cv = create_ceasars_shift_vector();
+    free(cv.table);
+    return SUCCESS;
+}

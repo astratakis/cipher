@@ -10,6 +10,11 @@ typedef struct tabula_recta {
     int size;
 } tabula_recta;
 
+typedef struct ceasars_shift_vector {
+    char *table;
+    int size;
+} ceasars_shift_vector;
+
 permutation generate_permutation();
 
 void print_permutation(permutation p);
@@ -17,3 +22,5 @@ void print_permutation(permutation p);
 char * one_time_pad(char *__input, int input_size, char *__key, int key_size);
 
 tabula_recta create_tabula_recta();
+
+ceasars_shift_vector create_ceasars_shift_vector();

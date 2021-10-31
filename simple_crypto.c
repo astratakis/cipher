@@ -68,3 +68,31 @@ tabula_recta create_tabula_recta() {
 
     return ans;
 }
+
+ceasars_shift_vector create_ceasars_shift_vector() {
+    ceasars_shift_vector ans;
+    ans.size = 2*26 + 10;
+    ans.table = malloc(ans.size);
+
+    char current = 'A';
+    for (int i=0; i<26; i++) {
+        ans.table[i] = current;
+        current++;
+    }
+
+    current = 'a';
+
+    for (int i=26; i<2*26; i++) {
+        ans.table[i] = current;
+        current++;
+    }
+
+    current = '0';
+
+    for (int i=2*26; i<(2*26 + 10); i++) {
+        ans.table[i] = current;
+        current++;
+    }
+
+    return ans;
+}
