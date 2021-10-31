@@ -16,9 +16,6 @@ typedef struct test {
 } test;
 
 test unit_tests[] = {
-    {"Vigenere's Implementation", "", 2, vigeneres_cipher_test_set_1},
-    {"Vigenere's Cipher (large)", "", 2, vigeneres_cipher_test_set_2},
-    {"Ceasars table", "", 1, check_ceasars_table},
-    {"Time limit example", "", 1, time_limit_example},
+    {"Tabula Recta creation", "Check if the tabula recta matrix is created correctly", 1, check_tabula_recta},
     NULL
 };
