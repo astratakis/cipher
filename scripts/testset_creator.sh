@@ -59,12 +59,17 @@ echo $1 > $4
 for ((i=1; i<=$1; i++));
 do
 	if [[ $2 -eq 1 ]]
+	then
+		echo asdf
 		# OTP random testset
 	elif [[ $2 -eq 2 ]]
+	then
+		echo asdf
 		# Caesar's random testset
 	else
 		# Vigenere's random testset
-
+		/bin/bash random_capital.sh $3 >> $4	# Input string
+		/bin/bash random_capital.sh $3 >> $4	# Key
 	fi	
 done
 
