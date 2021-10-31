@@ -1,17 +1,4 @@
-
-#ifndef _COLORS_
-#define _COLORS_
-
-#define RST   "\x1B[0m"
-#define KRED  "\x1B[31m"
-#define KGRN  "\x1B[32m"
-#define KYEL  "\x1B[33m"
-#define KBLU  "\x1B[34m"
-#define KMAG  "\x1B[35m"
-#define KCYN  "\x1B[36m"
-#define KWHT  "\x1B[37m"
-
-#endif
+#include "test_functions.h"
 
 typedef enum test_verdict {
     OK,
@@ -28,6 +15,10 @@ typedef struct test {
     test_verdict verdict;
 } test;
 
-void execute_test(test *t);
-void print_test(test *t, int index);
-const char *verdict_to_string(test_verdict v);
+test unit_tests[] = {
+    {"Vigenere's Implementation", "", 2, vigeneres_cipher_test_set_1},
+    {"Vigenere's Cipher (large)", "", 2, vigeneres_cipher_test_set_2},
+    {"Ceasars table", "", 1, check_ceasars_table},
+    {"Time limit example", "", 1, time_limit_example},
+    NULL
+};
