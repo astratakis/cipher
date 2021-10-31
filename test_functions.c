@@ -25,3 +25,56 @@ int check_tabula_recta(void) {
     return SUCCESS;
 }
 
+int vigeneres_sample_encrypt_test(void) {
+    const char *text = "ATTACKATDAWN";
+    const char *key = "LEMON";
+
+    char *result = encrypt_vigeneres(text, key);
+
+    if (strcmp(result, "LXFOPVEFRNHR") != 0) {
+        free(result);
+        return FAILURE;
+    }
+
+    free(result);
+    return SUCCESS;
+}
+
+int vigeneres_sample_decrypt_test(void) {
+    const char *encrypted = "LXFOPVEFRNHR";
+    const char *key = "LEMON";
+
+    char *result = decrypt_vigeneres(encrypted, key);
+    
+    if (strcmp(result, "ATTACKATDAWN") != 0) {
+        free(result);
+        return FAILURE;
+    }
+
+    free(result);
+    return SUCCESS;
+}
+
+int vigeneres_sample_both_test(void) {
+    const char *initial = "HELLOMYFRIENDS";
+    const char *key = "WHATAMIDOING";
+
+    char *encrypted = encrypt_vigeneres(initial, key);
+
+    if (strcmp(encrypted, "DLLEOYGIFQRTZZ") != 0) {
+        free(encrypted);
+        return FAILURE;
+    }
+
+    char *decrypted = decrypt_vigeneres(encrypted, key);
+
+    free(encrypted);
+
+    if (strcmp(decrypted, "HELLOMYFRIENDS") != 0) {
+        free(decrypted);
+        return FAILURE;
+    }
+
+    free(decrypted);
+    return SUCCESS;
+}
