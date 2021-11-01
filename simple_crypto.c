@@ -32,8 +32,8 @@ ceasars_shift_vector create_ceasars_shift_vector() {
     return ans;
 }
 
-char *encrypt_vigeneres(const char *__plain_text, const char *__key) {
-    char *encrypted = malloc(strlen(__plain_text) + 1);
+string encrypt_vigeneres(const string __plain_text, const string __key) {
+    string encrypted = malloc(strlen(__plain_text) + 1);
 
     for (int i=0; i<strlen(__plain_text); i++) {
         encrypted[i] = (__plain_text[i] - 0x41 + __key[i % strlen(__key)] - 0x41) % 26 + 0x41;
@@ -43,8 +43,8 @@ char *encrypt_vigeneres(const char *__plain_text, const char *__key) {
     return encrypted;
 }
 
-char *decrypt_vigeneres(const char *__encrypted, const char *__key) {
-    char *decrypted = malloc(strlen(__encrypted) + 1);
+string decrypt_vigeneres(const string __encrypted, const string __key) {
+    string decrypted = malloc(strlen(__encrypted) + 1);
 
     for (int i=0; i<strlen(__encrypted); i++) {
         decrypted[i] = (__encrypted[i] - __key[i % strlen(__key)] + 26) % 26 + 0x41;

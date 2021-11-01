@@ -11,10 +11,10 @@
 #define FAILURE 150
 
 int vigeneres_sample_encrypt_test(void) {
-    const char *text = "ATTACKATDAWN";
-    const char *key = "LEMON";
+    const string text = "ATTACKATDAWN";
+    const string key = "LEMON";
 
-    char *result = encrypt_vigeneres(text, key);
+    string result = encrypt_vigeneres(text, key);
 
     if (strcmp(result, "LXFOPVEFRNHR") != 0) {
         free(result);
@@ -26,10 +26,10 @@ int vigeneres_sample_encrypt_test(void) {
 }
 
 int vigeneres_sample_decrypt_test(void) {
-    const char *encrypted = "LXFOPVEFRNHR";
-    const char *key = "LEMON";
+    const string encrypted = "LXFOPVEFRNHR";
+    const string key = "LEMON";
 
-    char *result = decrypt_vigeneres(encrypted, key);
+    string result = decrypt_vigeneres(encrypted, key);
     
     if (strcmp(result, "ATTACKATDAWN") != 0) {
         free(result);
@@ -41,17 +41,17 @@ int vigeneres_sample_decrypt_test(void) {
 }
 
 int vigeneres_sample_both_test(void) {
-    const char *initial = "HELLOMYFRIENDS";
-    const char *key = "WHATAMIDOING";
+    const string initial = "HELLOMYFRIENDS";
+    const string key = "WHATAMIDOING";
 
-    char *encrypted = encrypt_vigeneres(initial, key);
+    string encrypted = encrypt_vigeneres(initial, key);
 
     if (strcmp(encrypted, "DLLEOYGIFQRTZZ") != 0) {
         free(encrypted);
         return FAILURE;
     }
 
-    char *decrypted = decrypt_vigeneres(encrypted, key);
+    string decrypted = decrypt_vigeneres(encrypted, key);
 
     free(encrypted);
 
@@ -75,18 +75,18 @@ int vigeneres_test_1(void) {
         int input_size;
         fscanf(in, "%d", &input_size);
 
-        char *input = malloc(input_size + 1);
+        string input = malloc(input_size + 1);
         fscanf(in, "%s", input);
 
         int key_size;
         fscanf(in, "%d", &key_size);
 
-        char *key = malloc(key_size + 1);
+        string key = malloc(key_size + 1);
         fscanf(in, "%s", key);
 
-        char *encrypted = encrypt_vigeneres(input, key);
+        string encrypted = encrypt_vigeneres(input, key);
 
-        char *output = malloc(input_size + 1);
+        string output = malloc(input_size + 1);
         fscanf(out, "%s", output);
 
         if (strcmp(encrypted, output) != 0) {
@@ -99,7 +99,7 @@ int vigeneres_test_1(void) {
             return FAILURE;
         }
 
-        char *decrypted = decrypt_vigeneres(encrypted, key);
+        string decrypted = decrypt_vigeneres(encrypted, key);
 
         if (strcmp(decrypted, input) != 0) {
             free(input);
@@ -132,18 +132,18 @@ int vigeneres_test_2(void) {
         int input_size;
         fscanf(in, "%d", &input_size);
 
-        char *input = malloc(input_size + 1);
+        string input = malloc(input_size + 1);
         fscanf(in, "%s", input);
 
         int key_size;
         fscanf(in, "%d", &key_size);
 
-        char *key = malloc(key_size + 1);
+        string key = malloc(key_size + 1);
         fscanf(in, "%s", key);
 
-        char *encrypted = encrypt_vigeneres(input, key);
+        string encrypted = encrypt_vigeneres(input, key);
 
-        char *output = malloc(input_size + 1);
+        string output = malloc(input_size + 1);
         fscanf(out, "%s", output);
 
         if (strcmp(encrypted, output) != 0) {
@@ -156,7 +156,7 @@ int vigeneres_test_2(void) {
             return FAILURE;
         }
 
-        char *decrypted = decrypt_vigeneres(encrypted, key);
+        string decrypted = decrypt_vigeneres(encrypted, key);
 
         if (strcmp(decrypted, input) != 0) {
             free(input);
@@ -189,18 +189,18 @@ int vigeneres_test_3(void) {
         int input_size;
         fscanf(in, "%d", &input_size);
 
-        char *input = malloc(input_size + 1);
+        string input = malloc(input_size + 1);
         fscanf(in, "%s", input);
 
         int key_size;
         fscanf(in, "%d", &key_size);
 
-        char *key = malloc(key_size + 1);
+        string key = malloc(key_size + 1);
         fscanf(in, "%s", key);
 
-        char *encrypted = encrypt_vigeneres(input, key);
+        string encrypted = encrypt_vigeneres(input, key);
 
-        char *output = malloc(input_size + 1);
+        string output = malloc(input_size + 1);
         fscanf(out, "%s", output);
 
         if (strcmp(encrypted, output) != 0) {
@@ -213,7 +213,7 @@ int vigeneres_test_3(void) {
             return FAILURE;
         }
 
-        char *decrypted = decrypt_vigeneres(encrypted, key);
+        string decrypted = decrypt_vigeneres(encrypted, key);
 
         if (strcmp(decrypted, input) != 0) {
             free(input);
@@ -246,18 +246,18 @@ int vigeneres_test_4(void) {
         int input_size;
         fscanf(in, "%d", &input_size);
 
-        char *input = malloc(input_size + 1);
+        string input = malloc(input_size + 1);
         fscanf(in, "%s", input);
 
         int key_size;
         fscanf(in, "%d", &key_size);
 
-        char *key = malloc(key_size + 1);
+        string key = malloc(key_size + 1);
         fscanf(in, "%s", key);
 
-        char *encrypted = encrypt_vigeneres(input, key);
+        string encrypted = encrypt_vigeneres(input, key);
 
-        char *output = malloc(input_size + 1);
+        string output = malloc(input_size + 1);
         fscanf(out, "%s", output);
 
         if (strcmp(encrypted, output) != 0) {
@@ -270,7 +270,7 @@ int vigeneres_test_4(void) {
             return FAILURE;
         }
 
-        char *decrypted = decrypt_vigeneres(encrypted, key);
+        string decrypted = decrypt_vigeneres(encrypted, key);
 
         if (strcmp(decrypted, input) != 0) {
             free(input);
