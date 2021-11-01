@@ -10,21 +10,6 @@
 #define SUCCESS 151
 #define FAILURE 150
 
-int check_tabula_recta(void) {
-    tabula_recta *tr = create_tabula_recta();
-
-    assert(tr->size == 26);
-
-    for (int i=0; i<tr->size; i++) {
-        assert(strlen(tr->matrix[i]) == tr->size);
-    }
-
-    free(tr->matrix);
-    free(tr);
-
-    return SUCCESS;
-}
-
 int vigeneres_sample_encrypt_test(void) {
     const char *text = "ATTACKATDAWN";
     const char *key = "LEMON";
