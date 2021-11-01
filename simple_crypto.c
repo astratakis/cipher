@@ -2,6 +2,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 #include "simple_crypto.h"
 
 ceasars_shift_vector create_ceasars_shift_vector() {
@@ -48,6 +50,32 @@ string decrypt_vigeneres(const string __encrypted, const string __key) {
 
     for (int i=0; i<strlen(__encrypted); i++) {
         decrypted[i] = (__encrypted[i] - __key[i % strlen(__key)] + 26) % 26 + 0x41;
+    }
+    decrypted[strlen(__encrypted)] = '\0';
+
+    return decrypted;
+}
+
+bool isletter(const char c) {
+    return (c >= 0x41 && c <= 0x5A) || (c >= 0x61 && c <= 0x7A);
+}
+
+string encrypt_caesars(const string __plain_text, const int shift) {
+    string encrypted = malloc(strlen(__plain_text) + 1);
+
+    for (int i=0; i<strlen(__plain_text); i++) {
+        encrypted[i] = __plain_text[i] + shift;
+    }
+    encrypted[strlen(__plain_text)] = '\0';
+
+    return encrypted;
+}
+
+string decrypt_caesars(const string __encrypted, const int shift) {
+    string decrypted = malloc((strlen(__encrypted) + 1));
+
+    for (int i=0; i<strlen(__encrypted); i++) {
+        decrypted[i] = __encrypted[i] - shift;
     }
     decrypted[strlen(__encrypted)] = '\0';
 

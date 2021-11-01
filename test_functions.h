@@ -10,5 +10,7 @@ int vigeneres_test_2(void);
 int vigeneres_test_3(void);
 int vigeneres_test_4(void);
 
+int caesars_sample_encrypt_test(void);
+int caesars_sample_decrypt_test(void);
 
 #endif

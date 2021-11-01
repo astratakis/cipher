@@ -291,3 +291,27 @@ int vigeneres_test_4(void) {
     }
     return SUCCESS;
 }
+
+int caesars_sample_encrypt_test(void) {
+    string encrypted = encrypt_caesars("hello", 1);
+
+    if (strcmp("ifmmp", encrypted) != 0) {
+        free(encrypted);
+        return FAILURE;
+    }
+
+    free(encrypted);
+    return SUCCESS;
+}
+
+int caesars_sample_decrypt_test(void) {
+    string dedcrypted = decrypt_caesars(encrypt_caesars("hello", 1), 1);
+
+    if (strcmp(dedcrypted, "hello") != 0) {
+        free(dedcrypted);
+        return FAILURE;
+    }
+
+    free(dedcrypted);
+    return SUCCESS;
+}
