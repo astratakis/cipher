@@ -64,7 +64,25 @@ string encrypt_caesars(const string __plain_text, const int shift) {
     string encrypted = malloc(strlen(__plain_text) + 1);
 
     for (int i=0; i<strlen(__plain_text); i++) {
-        encrypted[i] = __plain_text[i] + shift;
+        int enc_char = __plain_text[i];
+        if (isletter(__plain_text[i])) {
+            if (isupper(__plain_text[i])) {
+                enc_char -= 0x41;
+                enc_char = (enc_char + shift) % 26;
+                enc_char += 0x41;
+            }
+            else {
+                enc_char -= 0x61;
+                enc_char = (enc_char + shift) % 26;
+                enc_char += 0x61;
+            }
+        }
+        else if (isdigit(__plain_text[i])) {
+            enc_char -= 0x30;
+            enc_char = (enc_char + shift) % 10;
+            enc_char += 0x30;
+        }
+        encrypted[i] = enc_char;
     }
     encrypted[strlen(__plain_text)] = '\0';
 
