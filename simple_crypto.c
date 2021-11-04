@@ -6,34 +6,6 @@
 #include <ctype.h>
 #include "simple_crypto.h"
 
-ceasars_shift_vector create_ceasars_shift_vector() {
-    ceasars_shift_vector ans;
-    ans.size = 2*26 + 10;
-    ans.table = malloc(ans.size);
-
-    char current = 'A';
-    for (int i=0; i<26; i++) {
-        ans.table[i] = current;
-        current++;
-    }
-
-    current = 'a';
-
-    for (int i=26; i<2*26; i++) {
-        ans.table[i] = current;
-        current++;
-    }
-
-    current = '0';
-
-    for (int i=2*26; i<(2*26 + 10); i++) {
-        ans.table[i] = current;
-        current++;
-    }
-
-    return ans;
-}
-
 string encrypt_vigeneres(const string __plain_text, const string __key) {
     string encrypted = malloc(strlen(__plain_text) + 1);
 
@@ -93,7 +65,7 @@ string decrypt_caesars(const string __encrypted, const int shift) {
     string decrypted = malloc((strlen(__encrypted) + 1));
 
     for (int i=0; i<strlen(__encrypted); i++) {
-        decrypted[i] = __encrypted[i] - shift;
+        decrypted[i] = (__encrypted[i] - shift);
     }
     decrypted[strlen(__encrypted)] = '\0';
 

@@ -3,24 +3,22 @@
 #include <string.h>
 #include "simple_crypto.h"
 
+#define MAX_STRING_LENGTH 1e6
+
 int main(int argc, char **argv) {
 
-    char input[1000];
-
-    printf("[OTP] input: ");
-    scanf("%s", input);
-    printf("[OTP] encrypted: \n");
-    printf("[OTP] decrypted: \n");
+    string input = malloc(MAX_STRING_LENGTH);
 
     int shift;
-    memset(input, 0x0, 1000);
+    memset(input, 0x0, MAX_STRING_LENGTH);
 
     printf("[Caesars] input: ");
     scanf("%s", input);
     printf("[Caesars] key: ");
     scanf("%d", &shift);
-    printf("[Caesars] encrypted: \n");
-    printf("[Caesars] decrypted: \n");
+    string caesars_encrypted = encrypt_caesars(input, shift);
+    string caesars_decrypted = decrypt_caesars(caesars_decrypted, shift);
+    printf("[Caesars] encrypted: %s\n[Caesars] decrypted: %s\n", caesars_encrypted, caesars_decrypted);
 
     char key[1000];
     memset(input, 0x0, 1000);
