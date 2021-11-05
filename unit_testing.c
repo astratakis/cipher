@@ -1,3 +1,5 @@
+#ifdef __linux__
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -103,3 +105,5 @@ void print_test(test *t, int index) {
     printf("Test  [ %3d ] %30s  -  Verdict: [ %s%s%s ]\n", index, t->name, 
     (t->verdict == 0 ? KGRN : (t->verdict == 1 ? KMAG : KRED)), verdict_to_string(t->verdict), RST);
 }
+
+#endif
