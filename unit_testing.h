@@ -1,3 +1,5 @@
+#ifdef __linux__
+
 #include "test_functions.h"
 
 typedef enum test_verdict {
@@ -29,3 +31,5 @@ test unit_tests[] = {
     {"Caesar's all chars dec test", "Test all chars with shift 4", 1, caesars_test_2},
     NULL
 };
+
+#endif
