@@ -16,6 +16,11 @@ int main(int argc, char **argv) {
     reset_string(key);
 
     // ------------------ < One time padding > ------------------
+    printf("[OTP] input: ");
+    scanf("%s", input);
+    string enc_otp = encrypt_otp(input, "asgdfiaudgfiuasydgifua");
+    string dec_otp = decrypt_otp(enc_otp, "asgdfiaudgfiuasydgifua", strlen(input));
+    printf("[OTP] encrypted: %s\n[OTP] decrypted: %s\n", enc_otp, dec_otp);
     // ----------------------------------------------------------
 
     reset_string(input);

@@ -110,3 +110,32 @@ string decrypt_caesars(const string __encrypted, const int shift) {
 
     return decrypted;
 }
+
+string encrypt_otp(const string __plain_text, const string __key) {
+    string encrypted = malloc(strlen(__plain_text) + 1);
+
+    for (int i=0; i<strlen(__plain_text); i++) {
+        if (isdigit(__plain_text[i]) || isletter(__plain_text[i])) {
+            encrypted[i] = __plain_text[i] ^ __key[i];
+        }
+        else {
+            encrypted[i] = __plain_text[i];
+        }
+    }
+
+    encrypted[strlen(__plain_text)] = '\0';
+
+    return encrypted;
+}
+
+string decrypt_otp(const string __encrypted, const string __key, const int __text_size) {
+    string decrypted = malloc(__text_size + 1);
+
+    for (int i=0; i<__text_size; i++) {
+        decrypted[i] = __key[i] ^ __encrypted[i];
+    }
+
+    decrypted[__text_size] = '\0';
+
+    return decrypted;
+}

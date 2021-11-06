@@ -345,3 +345,22 @@ int caesars_test_2(void) {
 
     return SUCCESS;
 }
+
+int otp_sample_encrypt_test(void) {
+    string enc = encrypt_otp("hello", "XMCKL");
+
+    if (strcmp(enc, "0(/'#") != 0) {
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int otp_sample_decrypt_test(void) {
+    string dec = decrypt_otp("0(/'#", "XMCKL", 5);
+
+    if (strcmp(dec, "hello") != 0) {
+        return FAILURE;
+    }
+    return SUCCESS;
+}
