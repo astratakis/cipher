@@ -6,6 +6,8 @@
 #include <ctype.h>
 #include "simple_crypto.h"
 
+#define CAESARS_TABLE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
 string encrypt_vigeneres(const string __plain_text, const string __key) {
     string encrypted = malloc(strlen(__plain_text) + 1);
 
@@ -33,28 +35,38 @@ bool isletter(const char c) {
 }
 
 string encrypt_caesars(const string __plain_text, const int shift) {
+    
+    /*  Information about the character must not be lost.
+    *   This means that this algorithm will work on a specific character set
+    *   which is [0-9A-Za-z].
+    */
+
+    const int max_shifts = (26 + 26 + 10);
+    int rotation = shift % max_shifts;
     string encrypted = malloc(strlen(__plain_text) + 1);
 
     for (int i=0; i<strlen(__plain_text); i++) {
-        int enc_char = __plain_text[i];
-        if (isletter(__plain_text[i])) {
+        if (isdigit(__plain_text[i])) {
+            int pos = __plain_text[i] - 0x30;
+
+            pos = (pos + rotation) % max_shifts;
+            encrypted[i] = CAESARS_TABLE[pos];
+        }
+        else if (isletter(__plain_text[i])) {
+            int pos;
             if (isupper(__plain_text[i])) {
-                enc_char -= 0x41;
-                enc_char = (enc_char + shift) % 26;
-                enc_char += 0x41;
+                pos = __plain_text[i] - 0x41 + 10;
             }
             else {
-                enc_char -= 0x61;
-                enc_char = (enc_char + shift) % 26;
-                enc_char += 0x61;
+                pos = __plain_text[i] - 0x61 + 36;
             }
+
+            pos = (pos + rotation) % max_shifts;
+            encrypted[i] = CAESARS_TABLE[pos];
         }
-        else if (isdigit(__plain_text[i])) {
-            enc_char -= 0x30;
-            enc_char = (enc_char + shift) % 10;
-            enc_char += 0x30;
+        else {
+            encrypted[i] = __plain_text[i];
         }
-        encrypted[i] = enc_char;
     }
     encrypted[strlen(__plain_text)] = '\0';
 
@@ -62,10 +74,37 @@ string encrypt_caesars(const string __plain_text, const int shift) {
 }
 
 string decrypt_caesars(const string __encrypted, const int shift) {
+
+    const int max_shifts = (26 + 26 + 10);
+    int rotation = shift % max_shifts;
     string decrypted = malloc((strlen(__encrypted) + 1));
 
     for (int i=0; i<strlen(__encrypted); i++) {
-        decrypted[i] = (__encrypted[i] - shift);
+        if (isdigit(__encrypted[i])) {
+            int pos = __encrypted[i] - 0x30;
+
+            pos -= rotation;
+            pos += (pos < 0 ? max_shifts : 0);
+
+            decrypted[i] = CAESARS_TABLE[pos];
+        }
+        else if (isletter(__encrypted[i])) {
+            int pos;
+            if (isupper(__encrypted[i])) {
+                pos = __encrypted[i] - 0x41 + 10;
+            }
+            else {
+                pos = __encrypted[i] - 0x61 + 36;
+            }
+
+            pos -= rotation;
+            pos += (pos < 0 ? max_shifts : 0);
+
+            decrypted[i] = CAESARS_TABLE[pos];
+        }
+        else {
+            decrypted[i] = __encrypted[i];
+        }
     }
     decrypted[strlen(__encrypted)] = '\0';
 

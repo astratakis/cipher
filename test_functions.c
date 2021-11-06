@@ -315,3 +315,33 @@ int caesars_sample_decrypt_test(void) {
     free(dedcrypted);
     return SUCCESS;
 }
+
+int caesars_test_1(void) {
+    const string text = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    int key = 4;
+
+    string enc = encrypt_caesars(text, key);
+
+    const string expected = "456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123";
+
+    if (strcmp(enc, expected) != 0) {
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int caesars_test_2(void) {
+    const string enc = "456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123";
+    int key = 4;
+
+    string dec = decrypt_caesars(enc, key);
+
+    const string expected = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    if (strcmp(dec, expected) != 0) {
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}

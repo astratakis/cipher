@@ -25,5 +25,7 @@ test unit_tests[] = {
     {"Vigenere's T=1000, N=10000", "A very large scale test for Vigenere's implementation", 2, vigeneres_test_4},
     {"Caesar's samlpe encrypt", "Test hello with shift 1", 1, caesars_sample_encrypt_test},
     {"Caesar's sample decrypt", "Test hello shift 1, and -1", 1, caesars_sample_decrypt_test},
+    {"Caesar's all chars enc test", "Test all chars with shift 4", 1, caesars_test_1},
+    {"Caesar's all chars dec test", "Test all chars with shift 4", 1, caesars_test_2},
     NULL
 };
