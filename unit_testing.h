@@ -31,6 +31,8 @@ test unit_tests[] = {
     {"Caesar's all chars dec test", "Test all chars with shift 4", 1, caesars_test_2},
     {"OTP sample encrypt", "", 1, otp_sample_encrypt_test},
     {"OTP sample decrypt", "", 1, otp_sample_decrypt_test},
+    {"OTP test 1", "", 1, otp_test_1},
+    {"OTP test 2", "", 1, otp_test_2},
     NULL
 };
 

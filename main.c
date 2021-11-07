@@ -1,11 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <assert.h>
 #include "simple_crypto.h"
 
 #define MAX_STRING_LENGTH 1e6
 
 #define reset_string(s) memset(s, 0x0, MAX_STRING_LENGTH)
+
+void print_byte_array(char *ptr, unsigned int size) {
+    for (int i=0; i<size; i++) {
+        printf("%s%02x%s", (i > 0 ? ":" : ""), ptr[i], (i == size-1 ? "\n" : ""));
+    }
+}
 
 int main(int argc, char **argv) {
 
@@ -18,9 +27,20 @@ int main(int argc, char **argv) {
     // ------------------ < One time padding > ------------------
     printf("[OTP] input: ");
     scanf("%s", input);
-    string enc_otp = encrypt_otp(input, "asgdfiaudgfiuasydgifua");
-    string dec_otp = decrypt_otp(enc_otp, "asgdfiaudgfiuasydgifua", strlen(input));
-    printf("[OTP] encrypted: %s\n[OTP] decrypted: %s\n", enc_otp, dec_otp);
+    unsigned int size = strlen(input);
+
+    string random_key = malloc(size + 1);
+    int random_fd = open("/dev/urandom", O_RDONLY);
+
+    assert(random_fd >= 0);
+
+    read(random_fd, random_key, size);
+
+    string enc_otp = encrypt_otp(input, random_key, size);
+    string dec_otp = decrypt_otp(enc_otp, random_key, strlen(input));
+    printf("[OTP] encrypted: ");
+    print_byte_array(enc_otp, size);
+    printf("[OTP] decrypted: %s\n", dec_otp);
     // ----------------------------------------------------------
 
     reset_string(input);

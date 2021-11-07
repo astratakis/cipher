@@ -111,10 +111,10 @@ string decrypt_caesars(const string __encrypted, const int shift) {
     return decrypted;
 }
 
-string encrypt_otp(const string __plain_text, const string __key) {
-    string encrypted = malloc(strlen(__plain_text) + 1);
+string encrypt_otp(const string __plain_text, const string __key, const int __text_size) {
+    string encrypted = malloc(__text_size + 1);
 
-    for (int i=0; i<strlen(__plain_text); i++) {
+    for (int i=0; i<__text_size; i++) {
         if (isdigit(__plain_text[i]) || isletter(__plain_text[i])) {
             encrypted[i] = __plain_text[i] ^ __key[i];
         }
@@ -123,7 +123,7 @@ string encrypt_otp(const string __plain_text, const string __key) {
         }
     }
 
-    encrypted[strlen(__plain_text)] = '\0';
+    encrypted[__text_size] = '\0';
 
     return encrypted;
 }

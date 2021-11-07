@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <assert.h>
+#include <fcntl.h>
 
 #include "test_functions.h"
 #include "simple_crypto.h"
@@ -347,7 +348,7 @@ int caesars_test_2(void) {
 }
 
 int otp_sample_encrypt_test(void) {
-    string enc = encrypt_otp("hello", "XMCKL");
+    string enc = encrypt_otp("hello", "XMCKL", 5);
 
     if (strcmp(enc, "0(/'#") != 0) {
         return FAILURE;
@@ -363,4 +364,41 @@ int otp_sample_decrypt_test(void) {
         return FAILURE;
     }
     return SUCCESS;
+}
+
+int otp_test_1(void) {
+
+    const unsigned int _max_length = 1e6;
+
+    string initial = malloc(_max_length);
+    int file_desc = open("/dev/urandom", O_RDONLY);
+    size_t size = read(file_desc, initial, _max_length);
+
+    assert(size > 0);
+
+    string key = malloc(_max_length);
+    size = read(file_desc, key, _max_length);
+
+    string encrypted = encrypt_otp(initial, key, _max_length);
+
+    for (int i=0; i<_max_length; i++) {
+        if (encrypted[i] != (initial[i] ^ key[i])) {
+            printf("%d\n", i);
+            return FAILURE;
+        }
+    }
+
+    string decrypted = decrypt_otp(encrypted, key, _max_length);
+
+    for (int i=0; i<_max_length; i++) {
+        if (initial[i] != decrypted[i]) {
+            return FAILURE;
+        }
+    }
+
+    return SUCCESS;
+}
+
+int otp_test_2(void) {
+
 }
