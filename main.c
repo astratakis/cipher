@@ -12,7 +12,7 @@
 
 void print_byte_array(char *ptr, unsigned int size) {
     for (int i=0; i<size; i++) {
-        printf("%s%02x%s", (i > 0 ? ":" : ""), ptr[i], (i == size-1 ? "\n" : ""));
+        printf("%s%02hhx%s", (i > 0 ? ":" : ""), ptr[i], (i == size-1 ? "\n" : ""));
     }
 }
 
