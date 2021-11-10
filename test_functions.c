@@ -398,7 +398,3 @@ int otp_test_1(void) {
 
     return SUCCESS;
 }
-
-int otp_test_2(void) {
-
-}

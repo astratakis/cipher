@@ -115,12 +115,7 @@ string encrypt_otp(const string __plain_text, const string __key, const int __te
     string encrypted = malloc(__text_size + 1);
 
     for (int i=0; i<__text_size; i++) {
-        if (isdigit(__plain_text[i]) || isletter(__plain_text[i])) {
-            encrypted[i] = __plain_text[i] ^ __key[i];
-        }
-        else {
-            encrypted[i] = __plain_text[i];
-        }
+        encrypted[i] = __plain_text[i] ^ __key[i];
     }
 
     encrypted[__text_size] = '\0';
